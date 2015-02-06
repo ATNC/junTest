@@ -1,0 +1,39 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+{% if g.user.is_authenticated() %}
+<form action="" method="post" name="post">
+    {{form.hidden_tag()}}
+    <table>
+
+        <tr>
+            <td>Some question?</td>
+            <td>{{ form.post(size = 40, class='span4') }}</td>
+            <td>
+            {% for error in form.errors.post %}
+            <span style="color: red;">[{{error}}]</span><br>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </div>
+                </div></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+{% else %}
+<h1> Some question? <a href='/login'>Register or login</a> </h1>
+{% endif %}
+<hr>
+{% for post in posts %}
+<p>
+  {% include 'post.html'%}
+</p>
+{% endfor %}
+{% endblock %}

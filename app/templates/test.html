@@ -1,0 +1,34 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h2>Question : {{ args }}</h2>
+{% if g.user.is_authenticated() %}
+<form action="" method="post" name="test">
+    {{form.hidden_tag()}}
+    <p>
+        {{ form.cmnt }}
+    </p>
+    <div class="control-group">
+            <div class="controls">
+                <input class="btn btn-primary" type="submit" value="Answer">
+            </div>
+        </div>
+</form>
+{% else %}
+<h3>Know answer? Register!</h3>
+{% endif %}
+<hr>
+<table>
+{% if  comments  %}
+<h3>Answers:</h3>
+{% for c in comments%}
+<tr valign="top"><td><p><i>{{ c.cmntU.nickname }}:</i> {{ c.txt }}<br><a href="{{c.cmntP.id}}/vote/{{c.id}}">Vote</a> : {{c.vote}}</p></td></tr>
+{% endfor %}
+{% else %}
+<h3>No answers</hr>
+{% endif %}
+</table
+{% endblock %}
